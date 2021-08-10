@@ -7,7 +7,6 @@
 @endsection
 
 @section('content')
-    <div class="row">
         <div class="col">
             <form action="{{route('post.store')}}" method="POST" enctype="multipart/form-data">
                 @csrf
