@@ -63,5 +63,8 @@
 
             </tbody>
         </table>
+        <div>
+            {{$games->links('vendor.pagination.bootstrap-4')}}
+        </div>
     </div>
 @endsection

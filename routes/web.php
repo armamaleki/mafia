@@ -27,6 +27,7 @@ Route::prefix('admin')->namespace('Admin')->middleware(['auth' , 'isAdmin'])->gr
     Route::resource('caffe', 'CaffeController');
     Route::resource('menu', 'MenuController');
     Route::resource('mafia', 'GameController');
+    Route::resource('tags', 'TagController');
 });
 
 

@@ -88,7 +88,9 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        //
+        $title='ویرایش پست ها';
+        $post=Post::find($id);
+        return view('admin.post.edit' , compact('title', 'post'));
     }
 
     /**
@@ -100,7 +102,25 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validated = $request->validate([
+            'title' => 'required',
+            'pic' => 'required|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'body' => 'required',
+            'status' => 'required',
+
+        ]);
+        $validated['user_id'] = Auth::user()->id;
+        $validated['slug'] = str_replace(' ', '-', $request['title']);
+        $image = $request->file('pic');
+        $new_name = rand() . '.' . $image->getClientOriginalExtension();
+//        $image= Image::resize(300,200);
+
+        $image->move(public_path("images"), $new_name);
+
+        $validated['pic'] = $new_name;
+        $post=Post::find($id)->update($validated);
+
+        return redirect()->route('post.index');
     }
 
     /**
@@ -111,6 +131,7 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Post::find($id)->delete();
+        return redirect()->back();
     }
 }

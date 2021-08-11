@@ -17,7 +17,7 @@ class CaffeController extends Controller
     public function index()
     {
         $title = 'کافه های برگذار کننده رویداد';
-        $caffes = Caffe::with('user')->paginate(3);
+        $caffes = Caffe::with('user')->paginate(10);
 
         return view('admin.caffe.index', compact('title', 'caffes'));
     }
@@ -29,7 +29,8 @@ class CaffeController extends Controller
      */
     public function create()
     {
-        return view('admin.caffe.create');
+        $title='اضافه کردن کافه جدید';
+        return view('admin.caffe.create' , compact('title'));
 
     }
 
