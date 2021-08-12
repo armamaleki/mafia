@@ -18,9 +18,7 @@
                 <th scope="col">تایتل</th>
                 <th scope="col">نام</th>
                 <th scope="col">ادرس</th>
-                <th scope="col">وضعیت</th>
-                <th scope="col">پاک کردن</th>
-                <th scope="col">ادیت کردن</th>
+                <th></th>
             </tr>
             </thead>
             <tbody>
@@ -31,28 +29,23 @@
                     <td>{{$caffe->title}}</td>
                     <td>{{$caffe->name}}</td>
                     <td>{{$caffe->address}}</td>
-                    <td>
-                        @if($caffe->status == 1)
-                            <button type="button" class="btn btn-outline-light">فعال</button>
-                        @else
-                            <button type="button" class="btn btn-outline-dark">غیر فعال</button>
-                        @endif
-                    </td>
-                    <td>
-                        <a onclick="document.getElementById('form-delete-{{$caffe->id}}').submit()"
-                           class="btn btn-outline-danger">پاک کردن</a>
-                        <form method="post" id="form-delete-{{$caffe->id}}"
-                              action="{{route('caffe.destroy', $caffe->id)}}">
-                            @csrf
-                            @method('delete')
-                        </form>
 
-                    </td>
-                    <td>
-                        <a href="{{route('caffe.edit',$caffe->id)}}" class="btn btn-outline-success">ادیت کردن</a>
 
+                    <td>
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                            <button type="button" class="btn @if($caffe->status== 1 )btn-outline-secondary @else btn-outline-danger @endif ">@if($caffe->status == 1)فعال@elseغیر فعال@endif</button>
+                            <a href="{{route('caffe.edit',$caffe->id)}}" class="btn btn-outline-success">ادیت کردن</a>
+                            <a onclick="document.getElementById('form-delete-{{$caffe->id}}').submit()"
+                               class="btn btn-outline-danger">پاک کردن</a>
+                            <form method="post" id="form-delete-{{$caffe->id}}"
+                                  action="{{route('caffe.destroy', $caffe->id)}}">
+                                @csrf
+                                @method('delete')
+                            </form>
+                        </div>
                     </td>
                 </tr>
+
             @endforeach
             </tbody>
         </table>

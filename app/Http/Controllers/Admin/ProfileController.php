@@ -20,7 +20,6 @@ class ProfileController extends Controller
         $title = 'پروفایل کاربری';
         $user = Auth::user();
 //        dd($user->toArray());
-
         return view('admin.profile', compact('title', 'user'));
     }
 
@@ -76,10 +75,28 @@ class ProfileController extends Controller
      */
     public function update(Request $request, $id)
     {
+//        $validated = User::where("id", $id)->update($request->except(['_token', '_method']));
+//        return redirect()->back();
+//        dd($request->toArray());
+        $user = $request->validate([
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'email' => 'required',
+            'address' => 'required',
+            'city' => 'required',
+            'postal_code' => 'required',
+            'about_me' => 'required',
+            'avatar' => 'required',
+        ]);
 
-
-
-        $validated = User::where("id", $id)->update($request->except(['_token', '_method']));
+        $image = $request->file('avatar');
+//        dd($image);
+        $name_image = $image->getClientOriginalName();
+        $new_image = Auth::user()->name . ' ' . $user['first_name'] . time() . $name_image;
+        $str_v = str_replace(' ', '-', $new_image);
+        $image->move(public_path('assets/img/users'), $str_v);
+        $user['avatar']=$str_v;
+        $users=User::find($id)->update($user);
         return redirect()->back();
     }
 

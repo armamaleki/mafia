@@ -54,5 +54,8 @@
             @endforeach
             </tbody>
         </table>
+        <div>
+            {{$menus->links('vendor.pagination.bootstrap-4')}}
+        </div>
     </div>
 @endsection

@@ -16,7 +16,7 @@
                         <div class="col-lg-3 order-lg-2">
                             <div class="card-profile-image">
                                 <a href="#">
-                                    <img src="../assets/img/theme/team-4.jpg" class="rounded-circle">
+                                    <img src="/assets/img/users/{{$user->avatar}}" class="rounded-circle">
                                 </a>
                             </div>
                         </div>
@@ -48,16 +48,16 @@
                         </div>
                         <div class="text-center">
                             <h5 class="h3">
-                                Jessica Jones<span class="font-weight-light">, 27</span>
+                                {{$user->name}}<span class="font-weight-light">, 27</span>
                             </h5>
                             <div class="h5 font-weight-300">
-                                <i class="ni location_pin mr-2"></i>Bucharest, Romania
+                                <i class="ni location_pin mr-2"></i>{{$user->email}}
                             </div>
                             <div class="h5 mt-4">
-                                <i class="ni business_briefcase-24 mr-2"></i>Solution Manager - Creative Tim Officer
+                                <i class="ni business_briefcase-24 mr-2"></i>ادرس
                             </div>
                             <div>
-                                <i class="ni education_hat mr-2"></i>University of Computer Science
+                                <i class="ni education_hat mr-2"></i>{{$user->address}}
                             </div>
                         </div>
                     </div>
@@ -76,7 +76,7 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <form method="post" action="/admin/profile/{{$user->id}}">
+                        <form method="post" action="/admin/profile/{{$user->id}}" enctype="multipart/form-data">
                             @csrf
                             {{ method_field('PUT') }}
                             <h6 class="heading-small text-muted mb-4">اطلاعات شما</h6>
@@ -94,7 +94,7 @@
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label class="form-control-label" for="input-email">ادرس ایمیل</label>
-                                            <input name="email" disabled type="email" id="input-email"
+                                            <input name="email"  type="email" id="input-email"
                                                    class="form-control"
                                                    value="{{$user->email}}">
                                         </div>
@@ -168,7 +168,7 @@
 
                             <div class="form-group">
                                 <label for="">پروفایل کاری</label>
-                                <input type="file" class="form-control-file" name="avatar" id="">
+                                <input type="file" value="{{asset('assets/img/user'.$user->avatar)}}" class="form-control-file" name="avatar" id="">
                             </div>
 
                             <div class="pl-lg-4">

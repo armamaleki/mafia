@@ -19,7 +19,7 @@ class GameController extends Controller
     public function index()
     {
         $title = 'بازی های مورد نظر ';
-        $games = Mafia::with('user')->paginate(2);
+        $games = Mafia::with('user')->paginate(20);
         return view('admin.mafia.index', compact('title', 'games'));
     }
 

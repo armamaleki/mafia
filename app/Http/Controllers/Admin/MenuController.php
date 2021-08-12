@@ -19,7 +19,7 @@ class MenuController extends Controller
     public function index()
     {
         $title = 'منو کافه ها';
-        $menus = Menu::with('caffe')->get()->sortDesc();
+        $menus = Menu::with('caffe')->paginate(20);
         return view('admin.menu.index', compact('title', 'menus'));
     }
 

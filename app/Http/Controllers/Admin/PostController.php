@@ -22,7 +22,7 @@ class PostController extends Controller
     {
 //        dd(Auth::check());
         $title = 'پست ها ';
-        $posts = Post::with('user')->get()->sortDesc();
+        $posts = Post::with('user')->paginate(20);
 
         return view('admin.post.index', compact('title', 'posts'));
     }
